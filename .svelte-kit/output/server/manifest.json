@@ -1,0 +1,121 @@
+{
+  ".svelte-kit/build/index.js": {
+    "file": "index.js",
+    "src": ".svelte-kit/build/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/build/hooks.js"
+    ]
+  },
+  "src/routes/speaking/index.json.js": {
+    "file": "entries/endpoints/speaking/index.json.js",
+    "src": "src/routes/speaking/index.json.js",
+    "isEntry": true
+  },
+  "src/routes/uses.js": {
+    "file": "entries/endpoints/uses.js",
+    "src": "src/routes/uses.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/lib/content/uses.md"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "entries/pages/__layout.svelte.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/__layout.svelte-a01f9204.css"
+    ]
+  },
+  "src/routes/__error.svelte": {
+    "file": "entries/pages/__error.svelte.js",
+    "src": "src/routes/__error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/__error.svelte-374032fa.css"
+    ]
+  },
+  "src/routes/speaking/__layout.svelte": {
+    "file": "entries/pages/speaking/__layout.svelte.js",
+    "src": "src/routes/speaking/__layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/speaking/__layout.svelte-af962692.css"
+    ]
+  },
+  "src/routes/about.svelte": {
+    "file": "entries/pages/about.svelte.js",
+    "src": "src/routes/about.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/speaking/__layout.svelte-af962692.css"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "entries/pages/index.svelte.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/index.svelte-ecca2c5f.css"
+    ]
+  },
+  "src/routes/speaking/index.svelte": {
+    "file": "entries/pages/speaking/index.svelte.js",
+    "src": "src/routes/speaking/index.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ]
+  },
+  "src/routes/uses.svelte": {
+    "file": "entries/pages/uses.svelte.js",
+    "src": "src/routes/uses.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ]
+  },
+  "src/routes/work.svelte": {
+    "file": "entries/pages/work.svelte.js",
+    "src": "src/routes/work.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-51146efc.js"
+    ],
+    "css": [
+      "assets/entries/pages/work.svelte-5432bfe3.css"
+    ]
+  },
+  "_index-51146efc.js": {
+    "file": "chunks/index-51146efc.js"
+  },
+  ".svelte-kit/build/hooks.js": {
+    "file": "chunks/hooks-1c45ba0b.js",
+    "src": ".svelte-kit/build/hooks.js",
+    "isDynamicEntry": true
+  },
+  "src/lib/content/uses.md": {
+    "file": "chunks/uses-36ccf696.js",
+    "src": "src/lib/content/uses.md",
+    "isDynamicEntry": true
+  }
+}
