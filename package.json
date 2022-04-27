@@ -9,7 +9,6 @@
     "start": ""
   },
   "dependencies": {
-    "@leveluptuts/svelte-notion": "^0.0.7",
     "gray-matter": "^4.0.2",
     "highlight.js": "^9.18.1",
     "marked": "^0.8.2"
