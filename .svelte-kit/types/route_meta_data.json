@@ -1,9 +1,19 @@
 {
-	"/": [],
-	"/about": [],
-	"/speaking": [],
-	"/uses": [
-		"src/routes/uses/+page.server.js"
+	"/": [
+		"src/routes/+layout.js",
+		"src/routes/+layout.js"
 	],
-	"/work": []
+	"/about": [
+		"src/routes/+layout.js"
+	],
+	"/speaking": [
+		"src/routes/+layout.js"
+	],
+	"/uses": [
+		"src/routes/uses/+page.server.js",
+		"src/routes/+layout.js"
+	],
+	"/work": [
+		"src/routes/+layout.js"
+	]
 }
