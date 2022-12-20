@@ -1,5 +1,5 @@
 <script>
-  import { fadeIn, fadeOut } from "../components/Fade";
+  import { fadeIn, fadeOut } from "../../components/Fade";
   const projects = [
     {
       title: "Level Up Tutorials",
@@ -30,6 +30,7 @@
 </script>
 
 <div in:fadeIn out:fadeOut>
+  <h1>My Work</h1>
   <p>Here is some stuff I've created or been a part of.</p>
 
   <ul>
@@ -50,12 +51,17 @@
   h3 {
     font-size: 2rem;
   }
+
   ul {
     padding: 0;
     margin: 0;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
   }
   li {
     margin-bottom: 3rem;
+    gap: 30px;
   }
 </style>

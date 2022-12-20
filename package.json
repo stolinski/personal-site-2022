@@ -1,17 +1,17 @@
 {
-  "name": "scott_tolinski",
+  "name": "scott_tolinski_dot_com",
   "description": "Web Developer | Creator of Level Up Tutorials | Co-host of Syntax.fm | Father of 2 | Bboy | Robotops Crew | Youtuber | Tea Drinker | Tutorial Maker | Fan of physical activity | Former Music Major | Denverite | Michigander | Shaw Brothers Kung Fu Film Watcher | Handstander | Stretching enthusiast",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "start": ""
+    "dev": "vite dev",
+    "build": "vite build"
   },
   "dependencies": {
     "gray-matter": "^4.0.2",
     "highlight.js": "^9.18.1",
-    "marked": "^0.8.2"
+    "marked": "^0.8.2",
+    "vite": "^4.0.2"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^1.0.0-next.34",

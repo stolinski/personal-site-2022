@@ -1,5 +1,6 @@
 <script>
-  import { fadeIn, fadeOut } from "../components/Fade";
+  import { fadeIn, fadeOut } from "../../components/Fade";
+  import Video from "../speaking/Video.svelte";
 </script>
 
 <svelte:head>
@@ -9,17 +10,11 @@
 <div class="wrapper" in:fadeIn out:fadeOut>
   <h1>About Scott</h1>
 
-  <iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/Q9eh2iJsjxE"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope;
-    picture-in-picture"
-    allowfullscreen
+  <Video
+    title="Scott Tolinski and the Origins of LevelUpTuts"
+    videoId="Q9eh2iJsjxE"
   />
-
-  <p>Hi, I'm Scott Tolinski.</p>
+  <div class="space" />
   <p>
     I own and make video tutorials teaching web development for
     <a target="_blank" href="http://www.youtube.com/user/LevelUpTuts/featured">
@@ -37,7 +32,7 @@
   </p>
   <p>
     I enjoy{" "}
-    <a target="_blank" href="http://youtu.be/Zcoj4Zfj6_k?t=1m34s">bboying</a>
+    <a target="_blank" href="http://youtu.be/Zcoj4Zfj6_k?t=1m34s">breaking</a>
     {" "} also known as breakdancing, and have been dancing for over 15 years doing
     shows for professional NFL and NBA teams. I'm inspired by a hot cup of green
     tea, excellent music, and Shaw Bros. kung fu movies.
@@ -47,5 +42,8 @@
 <style>
   .wrapper {
     max-width: 900px;
+  }
+  .space {
+    padding: 2rem;
   }
 </style>

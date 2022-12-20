@@ -1,0 +1,9 @@
+{
+	"/": [],
+	"/about": [],
+	"/speaking": [],
+	"/uses": [
+		"src/routes/uses/+page.server.js"
+	],
+	"/work": []
+}

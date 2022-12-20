@@ -41,10 +41,11 @@
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: space-around;
   }
 
   li {
-    font-size: 0.7rem;
+    font-size: 1.2rem;
     margin: 0;
   }
 
@@ -68,5 +69,11 @@
     text-decoration: none;
     padding: 1em 0.5em;
     display: block;
+  }
+
+  @media (min-width: 480px) {
+    ul {
+      justify-content: flex-start;
+    }
   }
 </style>

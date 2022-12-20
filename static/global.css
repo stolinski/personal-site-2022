@@ -1,19 +1,15 @@
-:root {
-  --yellow: #f1c40f;
-  --black: #111;
-  --bg: var(--black);
-  --primary: var(--yellow);
-}
-
 html {
   box-sizing: border-box;
 }
+
 * {
   box-sizing: inherit;
 }
+
 *:before {
   box-sizing: inherit;
 }
+
 *:after {
   box-sizing: inherit;
 }
@@ -24,32 +20,10 @@ html {
   font-size: 14px;
 }
 
-/* Desktops and laptops ----------- */
-@media only screen and (min-width: 600px) {
-  /* Styles */
-  html {
-    font-size: 20px;
-  }
-}
-
-/* Desktops and laptops ----------- */
-@media only screen and (min-width: 1224px) {
-  /* Styles */
-  html {
-    font-size: 24px;
-  }
-}
-
-/* Large screens ----------- */
-@media only screen and (min-width: 1824px) {
-  html {
-    font-size: 24px;
-  }
-}
-
 body {
   margin: 0;
 }
+
 article,
 aside,
 details,
@@ -64,23 +38,28 @@ section,
 summary {
   display: block;
 }
+
 audio,
 canvas,
 progress,
 video {
   display: inline-block;
 }
+
 audio:not([controls]) {
   display: none;
   height: 0;
 }
+
 progress {
   vertical-align: baseline;
 }
+
 [hidden],
 template {
   display: none;
 }
+
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;

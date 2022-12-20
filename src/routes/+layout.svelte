@@ -2,11 +2,13 @@
   import Nav from "$lib/Nav.svelte";
 </script>
 
-<Nav />
+<div class="theme">
+  <Nav />
 
-<main>
-  <slot />
-</main>
+  <main>
+    <slot />
+  </main>
+</div>
 
 <style>
   :global(body) {
@@ -14,9 +16,6 @@
     font-weight: normal;
     word-wrap: break-word;
     font-kerning: normal;
-    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
-    -ms-font-feature-settings: "kern", "liga", "clig", "calt";
-    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
     font-feature-settings: "kern", "liga", "clig", "calt";
     background: #111;
     line-height: 1.5;
@@ -28,6 +27,22 @@
   }
 
   main {
-    padding: 4rem 2rem;
+    padding: 2rem 2rem 0;
+    display: grid;
+  }
+
+  .theme {
+    --yellow: #f1c40f;
+    --black: #111;
+    --bg: var(--black);
+    --primary: var(--yellow);
+  }
+
+  :global(.theme.rad) {
+    --primary: #a8fe39;
+  }
+
+  :global(.theme.lut) {
+    --primary: #82d8d8;
   }
 </style>

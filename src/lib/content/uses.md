@@ -15,7 +15,3 @@ title: Uses
 - My studio monitors - [M-Audio BX8 D2 8-Inch Active 2-Way Studio Monitor Speakers](https://amzn.to/3cJ2uN7)
 - My mic arm - [K&M 23850 Microphone Desk Arm - Black](https://amzn.to/2KpqFUL)
 - My laptop stand - [Twelve South Curve](https://amzn.to/2Kq9H8D)
-
-### Apps
-
-- Design https://www.figma.com/
