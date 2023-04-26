@@ -36,8 +36,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<div><h1>My Work</h1>
   <p>Here is some stuff I&#39;ve created or been a part of.</p>
 
-  <ul class="${"svelte-u1bkgf"}">${each(projects, ({ title, desc, link }) => {
-    return `<li${add_attribute("key", title, 0)} class="${"svelte-u1bkgf"}"><h3 class="${"project-title svelte-u1bkgf"}"><a target="${"_blank"}" rel="${"noopener noreferrer"}"${add_attribute("href", link, 0)}>${escape(title)}</a></h3>
+  <ul class="svelte-u1bkgf">${each(projects, ({ title, desc, link }) => {
+    return `<li${add_attribute("key", title, 0)} class="svelte-u1bkgf"><h3 class="project-title svelte-u1bkgf"><a target="_blank" rel="noopener noreferrer"${add_attribute("href", link, 0)}>${escape(title)}</a></h3>
         <p><!-- HTML_TAG_START -->${desc}<!-- HTML_TAG_END --></p>
       </li>`;
   })}</ul>

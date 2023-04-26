@@ -12,8 +12,9 @@ const Video = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.videoId === void 0 && $$bindings.videoId && videoId !== void 0)
     $$bindings.videoId(videoId);
   $$result.css.add(css);
-  return `<div class="${"video_embed svelte-to7ki4"}"><iframe title="${"2fast"}" width="${"auto"}" height="${"315"}"${add_attribute("src", `https://www.youtube.com/embed/${videoId}`, 0)} frameborder="${"0"}" allow="${"accelerometer; encrypted-media; gyroscope;\n    picture-in-picture"}" allowfullscreen class="${"svelte-to7ki4"}"></iframe>
-  <span class="${"svelte-to7ki4"}">${escape(title)}</span>
+  return `<div class="video_embed svelte-to7ki4"><iframe title="2fast" width="auto" height="315"${add_attribute("src", `https://www.youtube.com/embed/${videoId}`, 0)} frameborder="0" allow="accelerometer; encrypted-media; gyroscope;
+    picture-in-picture" allowfullscreen class="svelte-to7ki4"></iframe>
+  <span class="svelte-to7ki4">${escape(title)}</span>
 </div>`;
 });
 export {

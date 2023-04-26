@@ -8,17 +8,17 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
   return `${$$result.head += `<!-- HEAD_svelte-1dk7q6a_START -->${$$result.title = `<title>Scott Tolinski - Level Up Tutorials &amp; Syntax - Web Developer</title>`, ""}<!-- HEAD_svelte-1dk7q6a_END -->`, ""}
 
-<div><div class="${"container svelte-x91x5z"}"><h1 class="${"svelte-x91x5z"}">Scott Tolinski</h1>
+<div><div class="container svelte-x91x5z"><h1 class="svelte-x91x5z">Scott Tolinski</h1>
 
-    <ul class="${"svelte-x91x5z"}"><li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://levelup.video"}" target="${"_blank"}" class="${"svelte-x91x5z"}">Level Up Tutorials</a></li>
-      <li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://youtube.com/leveluptuts"}" target="${"_blank"}" class="${"svelte-x91x5z"}">Youtube</a></li>
-      <li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://syntax.fm/"}" target="${"_blank"}" class="${"svelte-x91x5z"}">Syntax Podcast</a></li>
-      <li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://www.tiktok.com/@leveluptuts"}" target="${"_blank"}" class="${"svelte-x91x5z"}">TikTok</a></li>
-      <li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://www.instagram.com/leveluptutorials/"}" target="${"_blank"}" class="${"svelte-x91x5z"}">Instagram
+    <ul class="svelte-x91x5z"><li class="svelte-x91x5z"><a rel="noreferrer" href="https://levelup.video" target="_blank" class="svelte-x91x5z">Level Up Tutorials</a></li>
+      <li class="svelte-x91x5z"><a rel="noreferrer" href="https://youtube.com/leveluptuts" target="_blank" class="svelte-x91x5z">Youtube</a></li>
+      <li class="svelte-x91x5z"><a rel="noreferrer" href="https://syntax.fm/" target="_blank" class="svelte-x91x5z">Syntax Podcast</a></li>
+      <li class="svelte-x91x5z"><a rel="noreferrer" href="https://www.tiktok.com/@leveluptuts" target="_blank" class="svelte-x91x5z">TikTok</a></li>
+      <li class="svelte-x91x5z"><a rel="noreferrer" href="https://www.instagram.com/leveluptutorials/" target="_blank" class="svelte-x91x5z">Instagram
         </a></li>
-      <li class="${"svelte-x91x5z"}"><a rel="${"noreferrer"}" href="${"https://twitter.com/stolinski"}" target="${"_blank"}" class="${"svelte-x91x5z"}">Twitter</a></li></ul>
+      <li class="svelte-x91x5z"><a rel="noreferrer" href="https://twitter.com/stolinski" target="_blank" class="svelte-x91x5z">Twitter</a></li></ul>
 
-    <h3 class="${"svelte-x91x5z"}">Web Developer | Creator of Level Up Tutorials | Co-host of Syntax.fm |
+    <h3 class="svelte-x91x5z">Web Developer | Creator of Level Up Tutorials | Co-host of Syntax.fm |
       Father of 2 | Bboy | Robotops Crew | Youtuber | Tea Drinker | Tutorial
       Maker | Fan of physical activity | Former Music Major | Denverite |
       Michigander | Shaw Brothers Kung Fu Film Watcher | Handstander |

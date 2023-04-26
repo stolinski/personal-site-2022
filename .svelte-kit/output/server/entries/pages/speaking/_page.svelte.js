@@ -7,8 +7,8 @@ const css = {
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return `<div class="${"content svelte-1s0qyd9"}"><h1>Speaking &amp; Appearances</h1>
-  <a target="${"_blank"}" rel="${"noreferrer"}" href="${"https://devjourney.info/Guests/116-ScottTolinski"}" class="${"svelte-1s0qyd9"}">Dev Journey Podcast ⤴
+  return `<div class="content svelte-1s0qyd9"><h1>Speaking &amp; Appearances</h1>
+  <a target="_blank" rel="noreferrer" href="https://devjourney.info/Guests/116-ScottTolinski" class="svelte-1s0qyd9">Dev Journey Podcast ⤴
   </a>
 
   ${validate_component(Video, "Video").$$render(

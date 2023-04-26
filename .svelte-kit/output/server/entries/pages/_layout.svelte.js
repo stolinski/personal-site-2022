@@ -12,6 +12,7 @@ const getStores = () => {
   };
 };
 const page = {
+  /** @param {(value: any) => void} fn */
   subscribe(fn) {
     const store = getStores().page;
     return store.subscribe(fn);
@@ -27,16 +28,16 @@ const Nav = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$result.css.add(css$1);
   $$unsubscribe_page();
-  return `<nav><ul class="${"svelte-1j1q658"}"><li class="${"svelte-1j1q658"}"><a${add_attribute("aria-current", $page.url.pathname === "/", 0)} href="${"."}" class="${"svelte-1j1q658"}">home </a></li>
-    <li class="${"svelte-1j1q658"}"><a${add_attribute("aria-current", $page.url.pathname.includes("about"), 0)} href="${"/about"}" class="${"svelte-1j1q658"}">about
+  return `<nav><ul class="svelte-1j1q658"><li class="svelte-1j1q658"><a${add_attribute("aria-current", $page.url.pathname === "/", 0)} href="." class="svelte-1j1q658">home </a></li>
+    <li class="svelte-1j1q658"><a${add_attribute("aria-current", $page.url.pathname.includes("about"), 0)} href="/about" class="svelte-1j1q658">about
       </a></li>
-    <li class="${"svelte-1j1q658"}"><a${add_attribute("aria-current", $page.url.pathname.includes("speaking"), 0)} href="${"/speaking"}" class="${"svelte-1j1q658"}">speaking
-      </a></li>
-
-    <li class="${"svelte-1j1q658"}"><a${add_attribute("aria-current", $page.url.pathname.includes("work"), 0)} href="${"/work"}" class="${"svelte-1j1q658"}">work
+    <li class="svelte-1j1q658"><a${add_attribute("aria-current", $page.url.pathname.includes("speaking"), 0)} href="/speaking" class="svelte-1j1q658">speaking
       </a></li>
 
-    <li class="${"svelte-1j1q658"}"><a${add_attribute("aria-current", $page.url.pathname.includes("uses"), 0)} href="${"/uses"}" class="${"svelte-1j1q658"}">uses
+    <li class="svelte-1j1q658"><a${add_attribute("aria-current", $page.url.pathname.includes("work"), 0)} href="/work" class="svelte-1j1q658">work
+      </a></li>
+
+    <li class="svelte-1j1q658"><a${add_attribute("aria-current", $page.url.pathname.includes("uses"), 0)} href="/uses" class="svelte-1j1q658">uses
       </a></li></ul>
 </nav>`;
 });
@@ -47,9 +48,9 @@ const css = {
 };
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return `<div class="${"theme svelte-1rdayfr"}">${validate_component(Nav, "Nav").$$render($$result, {}, {}, {})}
+  return `<div class="theme svelte-1rdayfr">${validate_component(Nav, "Nav").$$render($$result, {}, {}, {})}
 
-  <main class="${"svelte-1rdayfr"}">${slots.default ? slots.default({}) : ``}</main>
+  <main class="svelte-1rdayfr">${slots.default ? slots.default({}) : ``}</main>
 </div>`;
 });
 export {

@@ -17,9 +17,9 @@ const Error = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
   return `${$$result.head += `<!-- HEAD_svelte-1moakz_START -->${$$result.title = `<title>${escape(status)}</title>`, ""}<!-- HEAD_svelte-1moakz_END -->`, ""}
 
-<h1 class="${"svelte-17w3omn"}">${escape(status)}</h1>
+<h1 class="svelte-17w3omn">${escape(status)}</h1>
 
-<p class="${"svelte-17w3omn"}">${escape(error?.message)}</p>
+<p class="svelte-17w3omn">${escape(error?.message)}</p>
 
 ${dev && error?.stack ? `<pre>${escape(error?.stack)}</pre>` : ``}`;
 });
