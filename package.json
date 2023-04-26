@@ -25,5 +25,10 @@
   "engines": {
     "node": ">=18.8.0",
     "pnpm": ">=7.5.0"
+  },
+  "overrides": {
+    "vite-plugin-markdown": {
+      "vite": "$vite"
+    }
   }
 }
