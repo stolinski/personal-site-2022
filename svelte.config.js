@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-cloudflare";
 import preprocess from "svelte-preprocess";
 import md, { Mode } from "vite-plugin-markdown";
 

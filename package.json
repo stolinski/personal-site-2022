@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@sveltejs/adapter-cloudflare": "^2.2.0",
     "gray-matter": "^4.0.2",
     "highlight.js": "^11.7.0",
     "marked": "^4.2.4",
