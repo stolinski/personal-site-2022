@@ -18,6 +18,12 @@
         Cascade Layers
         <ul>
           <li>
+            <a
+              href="https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/"
+              >Bramus - The Future of CSS: Cascade Layers
+            </a>
+          </li>
+          <li>
             <a href="https://ishadeed.com/article/cascade-layers/"
               >Ahmad Shadeed - Hello Cascade Layers</a
             >
