@@ -2,9 +2,35 @@
 
 <ul>
   <li>
+    Cascade
+    <ul>
+      <li>
+        :has
+        <ul>
+          <li>
+            <a href="https://webkit.org/blog/13096/css-has-pseudo-class/"
+              >Jen Simmons - :has</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Cascade Layers
+        <ul>
+          <li>
+            <a href="https://ishadeed.com/article/cascade-layers/"
+              >Ahmad Shadeed - Hello Cascade Layers</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
     Color
     <ul>
       <li>
+        OKLCH
         <ul>
           <li>
             <a
@@ -36,10 +62,24 @@
         </ul>
       </li>
       <li>
-        animation-composition demo
-        <a href="https://codepen.io/argyleink/pen/BaPxMWb"
-          >https://codepen.io/argyleink/pen/BaPxMWb</a
-        >
+        Animation Composition
+        <ul>
+          <li>
+            <a href="https://codepen.io/argyleink/pen/BaPxMWb"
+              >https://codepen.io/argyleink/pen/BaPxMWb</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        {`Linear()`}
+        <ul>
+          <li>
+            <a href="https://fullystacked.net/posts/linear/"
+              >Full Stacked Linear</a
+            >
+          </li>
+        </ul>
       </li>
     </ul>
   </li>
