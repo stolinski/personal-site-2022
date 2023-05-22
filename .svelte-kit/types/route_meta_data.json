@@ -9,6 +9,12 @@
 	"/speaking": [
 		"src/routes/+layout.js"
 	],
+	"/talks": [
+		"src/routes/+layout.js"
+	],
+	"/talks/fresh-style": [
+		"src/routes/+layout.js"
+	],
 	"/uses": [
 		"src/routes/uses/+page.server.js",
 		"src/routes/+layout.js"

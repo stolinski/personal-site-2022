@@ -41,6 +41,7 @@ const Nav = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       </a></li></ul>
 </nav>`;
 });
+const global = "";
 const _layout_svelte_svelte_type_style_lang = "";
 const css = {
   code: 'body{color:#fff;font-weight:normal;word-wrap:break-word;font-kerning:normal;font-feature-settings:"kern", "liga", "clig", "calt";background:#111;line-height:1.5;font-family:"Space Mono", monospace}p > a{background:var(--blue)}main.svelte-1rdayfr{padding:2rem 2rem 0;display:grid}.theme.svelte-1rdayfr{--yellow:#f1c40f;--black:#111;--bg:var(--black);--primary:var(--yellow)}.theme.rad{--primary:#a8fe39}.theme.lut{--primary:#82d8d8}',

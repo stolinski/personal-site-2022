@@ -20,8 +20,8 @@ function blank_object() {
 function run_all(fns) {
   fns.forEach(run);
 }
-function safe_not_equal(a2, b) {
-  return a2 != a2 ? b == b : a2 !== b || (a2 && typeof a2 === "object" || typeof a2 === "function");
+function safe_not_equal(a, b) {
+  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
 }
 function subscribe(store, ...callbacks) {
   if (store == null) {
@@ -73,6 +73,7 @@ function create_ssr_component(fn) {
     const $$ = {
       on_destroy,
       context: new Map(context || (parent_component ? parent_component.$$.context : [])),
+      // these will be immediately discarded
       on_mount: [],
       before_update: [],
       after_update: [],
@@ -94,6 +95,7 @@ function create_ssr_component(fn) {
         css: {
           code: Array.from(result.css).map((css3) => css3.code).join("\n"),
           map: null
+          // TODO
         },
         head: result.title + result.head
       };
@@ -152,6 +154,7 @@ var init_layout_svelte = __esm({
       };
     };
     page = {
+      /** @param {(value: any) => void} fn */
       subscribe(fn) {
         const store = getStores().page;
         return store.subscribe(fn);
@@ -211,8 +214,8 @@ var init__ = __esm({
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
     universal_id = "src/routes/+layout.js";
-    imports = ["_app/immutable/entry/_layout.svelte.6fae196f.js", "_app/immutable/chunks/index.5429c538.js", "_app/immutable/chunks/singletons.856d0d5c.js", "_app/immutable/entry/_layout.js.984db11e.js", "_app/immutable/chunks/_layout.da46b06b.js"];
-    stylesheets = ["_app/immutable/assets/_layout.58f27515.css"];
+    imports = ["_app/immutable/nodes/0.39be7764.js", "_app/immutable/chunks/index.9e113df3.js", "_app/immutable/chunks/singletons.254110ff.js"];
+    stylesheets = ["_app/immutable/assets/0.65c4b68f.css"];
     fonts = [];
   }
 });
@@ -266,8 +269,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    imports2 = ["_app/immutable/entry/_error.svelte.fd8378df.js", "_app/immutable/chunks/index.5429c538.js"];
-    stylesheets2 = ["_app/immutable/assets/_error.222277ab.css"];
+    imports2 = ["_app/immutable/nodes/1.b3a19779.js", "_app/immutable/chunks/index.9e113df3.js"];
+    stylesheets2 = ["_app/immutable/assets/1.222277ab.css"];
     fonts2 = [];
   }
 });
@@ -367,14 +370,16 @@ var options = {
   app_template_contains_nonce: false,
   csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
   csrf_check_origin: true,
+  track_server_fetches: false,
   embedded: false,
   env_public_prefix: "PUBLIC_",
   hooks: null,
+  // added lazily, via `get_hooks`
   preload_strategy: "modulepreload",
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="viewport" content="width=device-width,initial-scale=1.0" />\n    <meta name="theme-color" content="#333333" />\n    <link rel="stylesheet" href="global.css" />\n    <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />\n    <link rel="icon" type="image/png" href="favicon.png" />\n    <link rel="preconnect" href="https://fonts.googleapis.com" />\n    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n    <link\n      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"\n      rel="stylesheet"\n    />\n\n    <!-- This contains the contents of the <svelte:head> component, if\n	     the current page has one -->\n    ' + head + '\n  </head>\n  <body>\n    <!-- The application will be rendered inside this element,\n	     because `src/client.js` references it -->\n    <div id="sapper">' + body + "</div>\n  </body>\n</html>\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="viewport" content="width=device-width,initial-scale=1.0" />\n    <meta name="theme-color" content="#333333" />\n    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />\n    <link rel="icon" type="image/png" href="/favicon.png" />\n    <link rel="preconnect" href="https://fonts.googleapis.com" />\n    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n    <link\n      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"\n      rel="stylesheet"\n    />\n\n    <!-- This contains the contents of the <svelte:head> component, if\n	     the current page has one -->\n    ' + head + '\n  </head>\n  <body>\n    <!-- The application will be rendered inside this element,\n	     because `src/client.js` references it -->\n    <div id="sapper">' + body + "</div>\n  </body>\n</html>\n",
     error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -435,7 +440,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "nhw5av"
+  version_hash: "19iquxk"
 };
 function get_hooks() {
   return {};
@@ -453,17 +458,17 @@ function negotiate(accept, types) {
       parts.push({ type, subtype, q: +q, i });
     }
   });
-  parts.sort((a2, b) => {
-    if (a2.q !== b.q) {
-      return b.q - a2.q;
+  parts.sort((a, b) => {
+    if (a.q !== b.q) {
+      return b.q - a.q;
     }
-    if (a2.subtype === "*" !== (b.subtype === "*")) {
-      return a2.subtype === "*" ? 1 : -1;
+    if (a.subtype === "*" !== (b.subtype === "*")) {
+      return a.subtype === "*" ? 1 : -1;
     }
-    if (a2.type === "*" !== (b.type === "*")) {
-      return a2.type === "*" ? 1 : -1;
+    if (a.type === "*" !== (b.type === "*")) {
+      return a.type === "*" ? 1 : -1;
     }
-    return a2.i - b.i;
+    return a.i - b.i;
   });
   let accepted;
   let min_priority = Infinity;
@@ -492,6 +497,10 @@ function is_form_content_type(request) {
   );
 }
 var HttpError = class HttpError2 {
+  /**
+   * @param {number} status
+   * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
+   */
   constructor(status, body) {
     this.status = status;
     if (typeof body === "string") {
@@ -507,12 +516,20 @@ var HttpError = class HttpError2 {
   }
 };
 var Redirect = class Redirect2 {
+  /**
+   * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status
+   * @param {string} location
+   */
   constructor(status, location) {
     this.status = status;
     this.location = location;
   }
 };
 var ActionFailure = class ActionFailure2 {
+  /**
+   * @param {number} status
+   * @param {T} [data]
+   */
   constructor(status, data) {
     this.status = status;
     this.data = data;
@@ -550,15 +567,25 @@ function text(body, init2) {
   });
 }
 function coalesce_to_error(err) {
-  return err instanceof Error || err && err.name && err.message ? err : new Error(JSON.stringify(err));
+  return err instanceof Error || err && /** @type {any} */
+  err.name && /** @type {any} */
+  err.message ? (
+    /** @type {Error} */
+    err
+  ) : new Error(JSON.stringify(err));
 }
 function normalize_error(error2) {
-  return error2;
+  return (
+    /** @type {Redirect | HttpError | Error} */
+    error2
+  );
 }
 function method_not_allowed(mod, method) {
   return text(`${method} method not allowed`, {
     status: 405,
     headers: {
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+      // "The server must generate an Allow header field in a 405 status code response"
       allow: allowed_methods(mod).join(", ")
     }
   });
@@ -635,7 +662,10 @@ function stringify_uses(node) {
   return `"uses":{${uses.join(",")}}`;
 }
 async function render_endpoint(event, mod, state) {
-  const method = event.request.method;
+  const method = (
+    /** @type {import('types').HttpMethod} */
+    event.request.method
+  );
   let handler = mod[method];
   if (!handler && method === "HEAD") {
     handler = mod.GET;
@@ -656,6 +686,7 @@ async function render_endpoint(event, mod, state) {
   }
   try {
     const response = await handler(
+      /** @type {import('types').RequestEvent<Record<string, any>>} */
       event
     );
     if (!(response instanceof Response)) {
@@ -689,6 +720,7 @@ function is_endpoint_request(event) {
 }
 function compact(arr) {
   return arr.filter(
+    /** @returns {val is NonNullable<T>} */
     (val) => val != null
   );
 }
@@ -711,15 +743,24 @@ function decode_params(params) {
   }
   return params;
 }
-var tracked_url_properties = ["href", "pathname", "search", "searchParams", "toString", "toJSON"];
+var tracked_url_properties = (
+  /** @type {const} */
+  [
+    "href",
+    "pathname",
+    "search",
+    "searchParams",
+    "toString",
+    "toJSON"
+  ]
+);
 function make_trackable(url, callback) {
   const tracked = new URL(url);
   for (const property of tracked_url_properties) {
-    let value = tracked[property];
     Object.defineProperty(tracked, property, {
       get() {
         callback();
-        return value;
+        return url[property];
       },
       enumerable: true,
       configurable: true
@@ -763,19 +804,20 @@ function strip_data_suffix(pathname) {
 }
 var escaped = {
   "<": "\\u003C",
-  ">": "\\u003E",
-  "/": "\\u002F",
   "\\": "\\\\",
   "\b": "\\b",
   "\f": "\\f",
   "\n": "\\n",
   "\r": "\\r",
   "	": "\\t",
-  "\0": "\\u0000",
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
 var DevalueError = class extends Error {
+  /**
+   * @param {string} message
+   * @param {string[]} keys
+   */
   constructor(message, keys) {
     super(message);
     this.name = "DevalueError";
@@ -785,7 +827,9 @@ var DevalueError = class extends Error {
 function is_primitive(thing) {
   return Object(thing) !== thing;
 }
-var object_proto_names = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
+var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(
+  Object.prototype
+).sort().join("\0");
 function is_plain_object(thing) {
   const proto = Object.getPrototypeOf(thing);
   return proto === Object.prototype || proto === null || Object.getOwnPropertyNames(proto).sort().join("\0") === object_proto_names;
@@ -793,33 +837,48 @@ function is_plain_object(thing) {
 function get_type(thing) {
   return Object.prototype.toString.call(thing).slice(8, -1);
 }
+function get_escaped_char(char) {
+  switch (char) {
+    case '"':
+      return '\\"';
+    case "<":
+      return "\\u003C";
+    case "\\":
+      return "\\\\";
+    case "\n":
+      return "\\n";
+    case "\r":
+      return "\\r";
+    case "	":
+      return "\\t";
+    case "\b":
+      return "\\b";
+    case "\f":
+      return "\\f";
+    case "\u2028":
+      return "\\u2028";
+    case "\u2029":
+      return "\\u2029";
+    default:
+      return char < " " ? `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}` : "";
+  }
+}
 function stringify_string(str) {
-  let result = '"';
-  for (let i = 0; i < str.length; i += 1) {
-    const char = str.charAt(i);
-    const code = char.charCodeAt(0);
-    if (char === '"') {
-      result += '\\"';
-    } else if (char in escaped) {
-      result += escaped[char];
-    } else if (code <= 31) {
-      result += `\\u${code.toString(16).toUpperCase().padStart(4, "0")}`;
-    } else if (code >= 55296 && code <= 57343) {
-      const next = str.charCodeAt(i + 1);
-      if (code <= 56319 && next >= 56320 && next <= 57343) {
-        result += char + str[++i];
-      } else {
-        result += `\\u${code.toString(16).toUpperCase()}`;
-      }
-    } else {
-      result += char;
+  let result = "";
+  let last_pos = 0;
+  const len = str.length;
+  for (let i = 0; i < len; i += 1) {
+    const char = str[i];
+    const replacement = get_escaped_char(char);
+    if (replacement) {
+      result += str.slice(last_pos, i) + replacement;
+      last_pos = i + 1;
     }
   }
-  result += '"';
-  return result;
+  return `"${last_pos === 0 ? str : result + str.slice(last_pos)}"`;
 }
 var chars$1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
-var unsafe_chars = /[<>\b\f\n\r\t\0\u2028\u2029]/g;
+var unsafe_chars = /[<\b\f\n\r\t\0\u2028\u2029]/g;
 var reserved = /^(?:do|if|in|for|int|let|new|try|var|byte|case|char|else|enum|goto|long|this|void|with|await|break|catch|class|const|final|float|short|super|throw|while|yield|delete|double|export|import|native|return|switch|throws|typeof|boolean|default|extends|finally|package|private|abstract|continue|debugger|function|volatile|interface|protected|transient|implements|instanceof|synchronized)$/;
 function uneval(value, replacer) {
   const counts = /* @__PURE__ */ new Map();
@@ -893,7 +952,7 @@ function uneval(value, replacer) {
   }
   walk(value);
   const names = /* @__PURE__ */ new Map();
-  Array.from(counts).filter((entry) => entry[1] > 1).sort((a2, b) => b[1] - a2[1]).forEach((entry, i) => {
+  Array.from(counts).filter((entry) => entry[1] > 1).sort((a, b) => b[1] - a[1]).forEach((entry, i) => {
     names.set(entry[0], get_name(i));
   });
   function stringify2(thing) {
@@ -917,8 +976,11 @@ function uneval(value, replacer) {
       case "Date":
         return `new Date(${thing.getTime()})`;
       case "Array":
-        const members = thing.map(
-          (v, i) => i in thing ? stringify2(v) : ""
+        const members = (
+          /** @type {any[]} */
+          thing.map(
+            (v, i) => i in thing ? stringify2(v) : ""
+          )
         );
         const tail = thing.length === 0 || thing.length - 1 in thing ? "" : ",";
         return `[${members.join(",")}${tail}]`;
@@ -943,6 +1005,7 @@ function uneval(value, replacer) {
       params.push(name);
       if (custom.has(thing)) {
         values.push(
+          /** @type {string} */
           custom.get(thing)
         );
         return;
@@ -1205,6 +1268,8 @@ async function handle_action_json_request(event, options2, server2) {
       {
         status: no_actions_error.status,
         headers: {
+          // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+          // "The server must generate an Allow header field in a 405 status code response"
           allow: "GET"
         }
       }
@@ -1219,8 +1284,12 @@ async function handle_action_json_request(event, options2, server2) {
       return action_json({
         type: "failure",
         status: data.status,
+        // @ts-expect-error we assign a string to what is supposed to be an object. That's ok
+        // because we don't use the object outside, and this way we have better code navigation
+        // through knowing where the related interface is used.
         data: stringify_action_response(
           data.data,
+          /** @type {string} */
           event.route.id
         )
       });
@@ -1228,8 +1297,10 @@ async function handle_action_json_request(event, options2, server2) {
       return action_json({
         type: "success",
         status: data ? 200 : 204,
+        // @ts-expect-error see comment above
         data: stringify_action_response(
           data,
+          /** @type {string} */
           event.route.id
         )
       });
@@ -1270,6 +1341,8 @@ async function handle_action_request(event, server2) {
   const actions = server2?.actions;
   if (!actions) {
     event.setHeaders({
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+      // "The server must generate an Allow header field in a 405 status code response"
       allow: "GET"
     });
     return {
@@ -1292,6 +1365,7 @@ async function handle_action_request(event, server2) {
       return {
         type: "success",
         status: 200,
+        // @ts-expect-error this will be removed upon serialization, so `undefined` is the same as omission
         data
       };
     }
@@ -1350,7 +1424,10 @@ function try_deserialize(data, fn, route_id) {
   try {
     return fn(data);
   } catch (e3) {
-    const error2 = e3;
+    const error2 = (
+      /** @type {any} */
+      e3
+    );
     if ("path" in error2) {
       let message = `Data returned from action inside ${route_id} is not serializable: ${error2.message}`;
       if (error2.path !== "")
@@ -1370,7 +1447,15 @@ async function unwrap_promises(object) {
   }
   return object;
 }
-async function load_server_data({ event, state, node, parent }) {
+var INVALIDATED_PARAM = "x-sveltekit-invalidated";
+async function load_server_data({
+  event,
+  state,
+  node,
+  parent,
+  // TODO 2.0: Remove this
+  track_server_fetches
+}) {
   if (!node?.server)
     return null;
   const uses = {
@@ -1390,9 +1475,12 @@ async function load_server_data({ event, state, node, parent }) {
     ...event,
     fetch: (info, init2) => {
       const url2 = new URL(info instanceof Request ? info.url : info, event.url);
-      uses.dependencies.add(url2.href);
+      if (track_server_fetches) {
+        uses.dependencies.add(url2.href);
+      }
       return event.fetch(info, init2);
     },
+    /** @param {string[]} deps */
     depends: (...deps) => {
       for (const dep of deps) {
         const { href } = new URL(dep, event.url);
@@ -1402,7 +1490,10 @@ async function load_server_data({ event, state, node, parent }) {
     params: new Proxy(event.params, {
       get: (target, key2) => {
         uses.params.add(key2);
-        return target[key2];
+        return target[
+          /** @type {string} */
+          key2
+        ];
       }
     }),
     parent: async () => {
@@ -1412,7 +1503,10 @@ async function load_server_data({ event, state, node, parent }) {
     route: new Proxy(event.route, {
       get: (target, key2) => {
         uses.route = true;
-        return target[key2];
+        return target[
+          /** @type {'id'} */
+          key2
+        ];
       }
     }),
     url
@@ -1496,7 +1590,10 @@ function create_universal_fetch(event, state, fetched, csr, resolve_opts) {
             fetched.push({
               url: same_origin ? url.href.slice(event.url.origin.length) : url.href,
               method: event.request.method,
-              request_body: input instanceof Request && cloned_body ? await stream_to_string(cloned_body) : init2?.body,
+              request_body: (
+                /** @type {string | ArrayBufferView | undefined} */
+                input instanceof Request && cloned_body ? await stream_to_string(cloned_body) : init2?.body
+              ),
               request_headers: init2?.headers,
               response_body: body,
               response: response2
@@ -1629,6 +1726,7 @@ var escape_html_attr_dict = {
   '"': "&quot;"
 };
 var escape_html_attr_regex = new RegExp(
+  // special characters
   `[${Object.keys(escape_html_attr_dict).join("")}]|[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]`,
   "g"
 );
@@ -1704,7 +1802,7 @@ function sha256(data) {
   for (let i = 0; i < array2.length; i += 16) {
     const w = array2.subarray(i, i + 16);
     let tmp;
-    let a2;
+    let a;
     let b;
     let out0 = out[0];
     let out1 = out[1];
@@ -1718,9 +1816,9 @@ function sha256(data) {
       if (i2 < 16) {
         tmp = w[i2];
       } else {
-        a2 = w[i2 + 1 & 15];
+        a = w[i2 + 1 & 15];
         b = w[i2 + 14 & 15];
-        tmp = w[i2 & 15] = (a2 >>> 7 ^ a2 >>> 18 ^ a2 >>> 3 ^ a2 << 25 ^ a2 << 14) + (b >>> 17 ^ b >>> 19 ^ b >>> 10 ^ b << 15 ^ b << 13) + w[i2 & 15] + w[i2 + 9 & 15] | 0;
+        tmp = w[i2 & 15] = (a >>> 7 ^ a >>> 18 ^ a >>> 3 ^ a << 25 ^ a << 14) + (b >>> 17 ^ b >>> 19 ^ b >>> 10 ^ b << 15 ^ b << 13) + w[i2 & 15] + w[i2 + 9 & 15] | 0;
       }
       tmp = tmp + out7 + (out4 >>> 6 ^ out4 >>> 11 ^ out4 >>> 25 ^ out4 << 26 ^ out4 << 21 ^ out4 << 7) + (out6 ^ out4 & (out5 ^ out6)) + key[i2];
       out7 = out6;
@@ -1771,14 +1869,14 @@ function precompute() {
 }
 function reverse_endianness(bytes) {
   for (let i = 0; i < bytes.length; i += 4) {
-    const a2 = bytes[i + 0];
+    const a = bytes[i + 0];
     const b = bytes[i + 1];
     const c2 = bytes[i + 2];
     const d = bytes[i + 3];
     bytes[i + 0] = d;
     bytes[i + 1] = c2;
     bytes[i + 2] = b;
-    bytes[i + 3] = a2;
+    bytes[i + 3] = a;
   }
 }
 function encode$1(str) {
@@ -1836,13 +1934,25 @@ var quoted = /* @__PURE__ */ new Set([
 ]);
 var crypto_pattern = /^(nonce|sha\d\d\d)-/;
 var BaseProvider = class {
+  /** @type {boolean} */
   #use_hashes;
+  /** @type {boolean} */
   #script_needs_csp;
+  /** @type {boolean} */
   #style_needs_csp;
+  /** @type {import('types').CspDirectives} */
   #directives;
+  /** @type {import('types').Csp.Source[]} */
   #script_src;
+  /** @type {import('types').Csp.Source[]} */
   #style_src;
+  /** @type {string} */
   #nonce;
+  /**
+   * @param {boolean} use_hashes
+   * @param {import('types').CspDirectives} directives
+   * @param {string} nonce
+   */
   constructor(use_hashes, directives, nonce) {
     this.#use_hashes = use_hashes;
     this.#directives = directives;
@@ -1857,6 +1967,7 @@ var BaseProvider = class {
     this.style_needs_nonce = this.#style_needs_csp && !this.#use_hashes;
     this.#nonce = nonce;
   }
+  /** @param {string} content */
   add_script(content) {
     if (this.#script_needs_csp) {
       if (this.#use_hashes) {
@@ -1866,6 +1977,7 @@ var BaseProvider = class {
       }
     }
   }
+  /** @param {string} content */
   add_style(content) {
     if (this.#style_needs_csp) {
       if (this.#use_hashes) {
@@ -1875,6 +1987,9 @@ var BaseProvider = class {
       }
     }
   }
+  /**
+   * @param {boolean} [is_meta]
+   */
   get_header(is_meta = false) {
     const header = [];
     const directives = { ...this.#directives };
@@ -1894,7 +2009,10 @@ var BaseProvider = class {
       if (is_meta && (key2 === "frame-ancestors" || key2 === "report-uri" || key2 === "sandbox")) {
         continue;
       }
-      const value = directives[key2];
+      const value = (
+        /** @type {string[] | true} */
+        directives[key2]
+      );
       if (!value)
         continue;
       const directive = [key2];
@@ -1919,6 +2037,11 @@ var CspProvider = class extends BaseProvider {
   }
 };
 var CspReportOnlyProvider = class extends BaseProvider {
+  /**
+   * @param {boolean} use_hashes
+   * @param {import('types').CspDirectives} directives
+   * @param {string} nonce
+   */
   constructor(use_hashes, directives, nonce) {
     super(use_hashes, directives, nonce);
     if (Object.values(directives).filter((v) => !!v).length > 0) {
@@ -1933,9 +2056,16 @@ var CspReportOnlyProvider = class extends BaseProvider {
   }
 };
 var Csp = class {
+  /** @readonly */
   nonce = generate_nonce();
+  /** @type {CspProvider} */
   csp_provider;
+  /** @type {CspReportOnlyProvider} */
   report_only_provider;
+  /**
+   * @param {import('./types').CspConfig} config
+   * @param {import('./types').CspOpts} opts
+   */
   constructor({ mode, directives, reportOnly }, { prerender: prerender2 }) {
     const use_hashes = mode === "hash" || mode === "auto" && prerender2;
     this.csp_provider = new CspProvider(use_hashes, directives, this.nonce);
@@ -1947,10 +2077,12 @@ var Csp = class {
   get style_needs_nonce() {
     return this.csp_provider.style_needs_nonce || this.report_only_provider.style_needs_nonce;
   }
+  /** @param {string} content */
   add_script(content) {
     this.csp_provider.add_script(content);
     this.report_only_provider.add_script(content);
   }
+  /** @param {string} content */
   add_style(content) {
     this.csp_provider.add_style(content);
     this.report_only_provider.add_style(content);
@@ -1959,9 +2091,9 @@ var Csp = class {
 function defer() {
   let fulfil;
   let reject;
-  const promise = new Promise((f, r2) => {
+  const promise = new Promise((f, r3) => {
     fulfil = f;
-    reject = r2;
+    reject = r3;
   });
   return { promise, fulfil, reject };
 }
@@ -2055,7 +2187,10 @@ async function render_response({
     }
     props.page = {
       error: error2,
-      params: event.params,
+      params: (
+        /** @type {Record<string, any>} */
+        event.params
+      ),
       route: event.route,
       status,
       url: event.url,
@@ -2189,6 +2324,7 @@ async function render_response({
       if (form_value) {
         serialized.form = uneval_action_response(
           form_value,
+          /** @type {string} */
           event.route.id
         );
       }
@@ -2269,7 +2405,10 @@ async function render_response({
     head,
     body,
     assets: assets$1,
-    nonce: csp.nonce,
+    nonce: (
+      /** @type {string} */
+      csp.nonce
+    ),
     env: public_env
   });
   const transformed = await resolve_opts.transformPageChunk({
@@ -2309,12 +2448,17 @@ function get_data(event, options2, nodes, global) {
       const id = promise_id++;
       count += 1;
       thing.then(
+        /** @param {any} data */
         (data) => ({ data })
       ).catch(
+        /** @param {any} error */
         async (error2) => ({
           error: await handle_error_and_jsonify(event, options2, error2)
         })
       ).then(
+        /**
+         * @param {{data: any; error: any}} result
+         */
         async ({ data, error: error2 }) => {
           count -= 1;
           let str;
@@ -2351,6 +2495,7 @@ function get_data(event, options2, nodes, global) {
   } catch (e3) {
     throw new Error(clarify_devalue_error(
       event,
+      /** @type {any} */
       e3
     ));
   }
@@ -2358,8 +2503,12 @@ function get_data(event, options2, nodes, global) {
 function get_option(nodes, option) {
   return nodes.reduce(
     (value, node) => {
-      return node?.universal?.[option] ?? node?.server?.[option] ?? value;
+      return (
+        /** @type {Value} TypeScript's too dumb to understand this */
+        node?.universal?.[option] ?? node?.server?.[option] ?? value
+      );
     },
+    /** @type {Value | undefined} */
     void 0
   );
 }
@@ -2384,7 +2533,8 @@ async function respond_with_error({
         event,
         state,
         node: default_layout,
-        parent: async () => ({})
+        parent: async () => ({}),
+        track_server_fetches: options2.track_server_fetches
       });
       const server_data = await server_data_promise;
       const data = await load_data({
@@ -2405,6 +2555,7 @@ async function respond_with_error({
         },
         {
           node: await manifest2._.nodes[1](),
+          // 1 is always the root error
           data: null,
           server_data: null
         }
@@ -2446,7 +2597,6 @@ function once(fn) {
     return result = fn();
   };
 }
-var INVALIDATED_PARAM = "x-sveltekit-invalidated";
 var encoder = new TextEncoder();
 async function render_data(event, route, options2, manifest2, state, invalidated_data_nodes, trailing_slash) {
   if (!route.page) {
@@ -2465,9 +2615,12 @@ async function render_data(event, route, options2, manifest2, state, invalidated
       return once(async () => {
         try {
           if (aborted) {
-            return {
-              type: "skip"
-            };
+            return (
+              /** @type {import('types').ServerDataSkippedNode} */
+              {
+                type: "skip"
+              }
+            );
           }
           const node = n2 == void 0 ? n2 : await manifest2._.nodes[n2]();
           return load_server_data({
@@ -2477,13 +2630,17 @@ async function render_data(event, route, options2, manifest2, state, invalidated
             parent: async () => {
               const data2 = {};
               for (let j = 0; j < i; j += 1) {
-                const parent = await functions[j]();
+                const parent = (
+                  /** @type {import('types').ServerDataNode | null} */
+                  await functions[j]()
+                );
                 if (parent) {
                   Object.assign(data2, parent.data);
                 }
               }
               return data2;
-            }
+            },
+            track_server_fetches: options2.track_server_fetches
           });
         } catch (e3) {
           aborted = true;
@@ -2493,9 +2650,12 @@ async function render_data(event, route, options2, manifest2, state, invalidated
     });
     const promises = functions.map(async (fn, i) => {
       if (!invalidated[i]) {
-        return {
-          type: "skip"
-        };
+        return (
+          /** @type {import('types').ServerDataSkippedNode} */
+          {
+            type: "skip"
+          }
+        );
       }
       return fn();
     });
@@ -2507,11 +2667,14 @@ async function render_data(event, route, options2, manifest2, state, invalidated
             throw error2;
           }
           length = Math.min(length, i + 1);
-          return {
-            type: "error",
-            error: await handle_error_and_jsonify(event, options2, error2),
-            status: error2 instanceof HttpError ? error2.status : void 0
-          };
+          return (
+            /** @type {import('types').ServerErrorNode} */
+            {
+              type: "error",
+              error: await handle_error_and_jsonify(event, options2, error2),
+              status: error2 instanceof HttpError ? error2.status : void 0
+            }
+          );
         })
       )
     );
@@ -2532,6 +2695,8 @@ async function render_data(event, route, options2, manifest2, state, invalidated
       }),
       {
         headers: {
+          // we use a proprietary content type to prevent buffering.
+          // the `text` prefix makes it inspectable
           "content-type": "text/sveltekit-data",
           "cache-control": "private, no-store"
         }
@@ -2566,21 +2731,25 @@ function get_data_json(event, options2, nodes) {
   let count = 0;
   const { iterator, push, done } = create_async_iterator();
   const reducers = {
+    /** @param {any} thing */
     Promise: (thing) => {
       if (typeof thing?.then === "function") {
         const id = promise_id++;
         count += 1;
         let key2 = "data";
         thing.catch(
+          /** @param {any} e */
           async (e3) => {
             key2 = "error";
             return handle_error_and_jsonify(
               event,
               options2,
+              /** @type {any} */
               e3
             );
           }
         ).then(
+          /** @param {any} value */
           async (value) => {
             let str;
             try {
@@ -2624,6 +2793,7 @@ function get_data_json(event, options2, nodes) {
   } catch (e3) {
     throw new Error(clarify_devalue_error(
       event,
+      /** @type {any} */
       e3
     ));
   }
@@ -2633,6 +2803,7 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
   if (state.depth > MAX_DEPTH) {
     return text(`Not found: ${event.url.pathname}`, {
       status: 404
+      // TODO in some cases this should be 500. not sure how to differentiate
     });
   }
   if (is_action_json_request(event)) {
@@ -2641,10 +2812,14 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
   }
   try {
     const nodes = await Promise.all([
+      // we use == here rather than === because [undefined] serializes as "[null]"
       ...page2.layouts.map((n2) => n2 == void 0 ? n2 : manifest2._.nodes[n2]()),
       manifest2._.nodes[page2.leaf]()
     ]);
-    const leaf_node = nodes.at(-1);
+    const leaf_node = (
+      /** @type {import('types').SSRNode} */
+      nodes.at(-1)
+    );
     let status = 200;
     let action_result = void 0;
     if (is_action_request(event)) {
@@ -2715,10 +2890,12 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
                   Object.assign(data, await parent.data);
               }
               return data;
-            }
+            },
+            track_server_fetches: options2.track_server_fetches
           });
         } catch (e3) {
-          load_error = e3;
+          load_error = /** @type {Error} */
+          e3;
           throw load_error;
         }
       });
@@ -2746,7 +2923,8 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
             csr
           });
         } catch (e3) {
-          load_error = e3;
+          load_error = /** @type {Error} */
+          e3;
           throw load_error;
         }
       });
@@ -2783,7 +2961,10 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
           const error2 = await handle_error_and_jsonify(event, options2, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index3 = page2.errors[i];
+              const index3 = (
+                /** @type {number} */
+                page2.errors[i]
+              );
               const node2 = await manifest2._.nodes[index3]();
               let j = i;
               while (!branch[j])
@@ -3039,6 +3220,14 @@ function get_cookies(request, url, trailing_slash) {
     secure: url.hostname === "localhost" && url.protocol === "http:" ? false : true
   };
   const cookies = {
+    // The JSDoc param annotations appearing below for get, set and delete
+    // are necessary to expose the `cookie` library types to
+    // typescript users. `@type {import('types').Cookies}` above is not
+    // sufficient to do so.
+    /**
+     * @param {string} name
+     * @param {import('cookie').CookieParseOptions} opts
+     */
     get(name, opts) {
       const c2 = new_cookies[name];
       if (c2 && domain_matches(url.hostname, c2.options.domain) && path_matches(url.pathname, c2.options.path)) {
@@ -3049,6 +3238,9 @@ function get_cookies(request, url, trailing_slash) {
       const cookie = req_cookies[name];
       return cookie;
     },
+    /**
+     * @param {import('cookie').CookieParseOptions} opts
+     */
     getAll(opts) {
       const decoder = opts?.decode || decodeURIComponent;
       const cookies2 = parse_1(header, { decode: decoder });
@@ -3059,24 +3251,29 @@ function get_cookies(request, url, trailing_slash) {
       }
       return Object.entries(cookies2).map(([name, value]) => ({ name, value }));
     },
+    /**
+     * @param {string} name
+     * @param {string} value
+     * @param {import('cookie').CookieSerializeOptions} opts
+     */
     set(name, value, opts = {}) {
-      let path = opts.path ?? default_path;
-      new_cookies[name] = {
-        name,
-        value,
-        options: {
-          ...defaults,
-          ...opts,
-          path
-        }
-      };
+      set_internal(name, value, { ...defaults, ...opts });
     },
+    /**
+     * @param {string} name
+     * @param {import('cookie').CookieSerializeOptions} opts
+     */
     delete(name, opts = {}) {
       cookies.set(name, "", {
         ...opts,
         maxAge: 0
       });
     },
+    /**
+     * @param {string} name
+     * @param {string} value
+     * @param {import('cookie').CookieSerializeOptions} opts
+     */
     serialize(name, value, opts) {
       return serialize_1(name, value, {
         ...defaults,
@@ -3086,6 +3283,7 @@ function get_cookies(request, url, trailing_slash) {
   };
   function get_cookie_header(destination, header2) {
     const combined_cookies = {
+      // cookies sent by the user agent have lowest precedence
       ...initial_cookies
     };
     for (const key2 in new_cookies) {
@@ -3105,7 +3303,18 @@ function get_cookies(request, url, trailing_slash) {
     }
     return Object.entries(combined_cookies).map(([name, value]) => `${name}=${value}`).join("; ");
   }
-  return { cookies, new_cookies, get_cookie_header };
+  function set_internal(name, value, opts) {
+    let path = opts.path ?? default_path;
+    new_cookies[name] = {
+      name,
+      value,
+      options: {
+        ...opts,
+        path
+      }
+    };
+  }
+  return { cookies, new_cookies, get_cookie_header, set_internal };
 }
 function domain_matches(hostname, constraint) {
   if (!constraint)
@@ -3291,10 +3500,9 @@ setCookie.exports = parse;
 setCookie.exports.parse = parse;
 var parseString_1 = setCookie.exports.parseString = parseString;
 var splitCookiesString_1 = setCookie.exports.splitCookiesString = splitCookiesString;
-function create_fetch({ event, options: options2, manifest: manifest2, state, get_cookie_header }) {
+function create_fetch({ event, options: options2, manifest: manifest2, state, get_cookie_header, set_internal }) {
   return async (info, init2) => {
     const original_request = normalize_fetch_input(info, init2, event.url);
-    const request_body = init2?.body;
     let mode = (info instanceof Request ? info.mode : init2?.mode) ?? "cors";
     let credentials = (info instanceof Request ? info.credentials : init2?.credentials) ?? "same-origin";
     return await options2.hooks.handleFetch({
@@ -3348,15 +3556,13 @@ function create_fetch({ event, options: options2, manifest: manifest2, state, ge
             request.headers.set("authorization", authorization);
           }
         }
-        if (request_body && typeof request_body !== "string" && !ArrayBuffer.isView(request_body)) {
-          throw new Error("Request body must be a string or TypedArray");
-        }
         if (!request.headers.has("accept")) {
           request.headers.set("accept", "*/*");
         }
         if (!request.headers.has("accept-language")) {
           request.headers.set(
             "accept-language",
+            /** @type {string} */
             event.request.headers.get("accept-language")
           );
         }
@@ -3368,9 +3574,10 @@ function create_fetch({ event, options: options2, manifest: manifest2, state, ge
         if (set_cookie) {
           for (const str of splitCookiesString_1(set_cookie)) {
             const { name, value, ...options3 } = parseString_1(str);
-            event.cookies.set(
+            set_internal(
               name,
               value,
+              /** @type {import('cookie').CookieSerializeOptions} */
               options3
             );
           }
@@ -3387,14 +3594,14 @@ function normalize_fetch_input(info, init2, url) {
   return new Request(typeof info === "string" ? new URL(info, url) : info, init2);
 }
 function validator(expected) {
-  const set = new Set(expected);
   function validate(module, file) {
     if (!module)
       return;
     for (const key2 in module) {
-      if (key2[0] === "_" || set.has(key2))
+      if (key2[0] === "_" || expected.has(key2))
         continue;
-      const hint = hint_for_supported_files(key2, file?.slice(file.lastIndexOf("."))) ?? `valid exports are ${expected.join(", ")}, or anything with a '_' prefix`;
+      const values = [...expected.values()];
+      const hint = hint_for_supported_files(key2, file?.slice(file.lastIndexOf("."))) ?? `valid exports are ${values.join(", ")}, or anything with a '_' prefix`;
       throw new Error(`Invalid export '${key2}'${file ? ` in ${file}` : ""} (${hint})`);
     }
   }
@@ -3402,30 +3609,37 @@ function validator(expected) {
 }
 function hint_for_supported_files(key2, ext = ".js") {
   let supported_files = [];
-  if (valid_common_exports.includes(key2)) {
+  if (valid_layout_exports.has(key2)) {
+    supported_files.push(`+layout${ext}`);
+  }
+  if (valid_page_exports.has(key2)) {
     supported_files.push(`+page${ext}`);
   }
-  if (valid_page_server_exports.includes(key2)) {
+  if (valid_layout_server_exports.has(key2)) {
+    supported_files.push(`+layout.server${ext}`);
+  }
+  if (valid_page_server_exports.has(key2)) {
     supported_files.push(`+page.server${ext}`);
   }
-  if (valid_server_exports.includes(key2)) {
+  if (valid_server_exports.has(key2)) {
     supported_files.push(`+server${ext}`);
   }
   if (supported_files.length > 0) {
-    return `'${key2}' is a valid export in ${supported_files.join(` or `)}`;
+    return `'${key2}' is a valid export in ${supported_files.slice(0, -1).join(`, `)}${supported_files.length > 1 ? " or " : ""}${supported_files.at(-1)}`;
   }
 }
-var valid_common_exports = ["load", "prerender", "csr", "ssr", "trailingSlash", "config"];
-var valid_page_server_exports = [
+var valid_layout_exports = /* @__PURE__ */ new Set([
   "load",
   "prerender",
   "csr",
   "ssr",
-  "actions",
   "trailingSlash",
   "config"
-];
-var valid_server_exports = [
+]);
+var valid_page_exports = /* @__PURE__ */ new Set([...valid_layout_exports, "entries"]);
+var valid_layout_server_exports = /* @__PURE__ */ new Set([...valid_layout_exports, "actions"]);
+var valid_page_server_exports = /* @__PURE__ */ new Set([...valid_layout_server_exports, "entries"]);
+var valid_server_exports = /* @__PURE__ */ new Set([
   "GET",
   "POST",
   "PATCH",
@@ -3434,9 +3648,12 @@ var valid_server_exports = [
   "OPTIONS",
   "prerender",
   "trailingSlash",
-  "config"
-];
-var validate_common_exports = validator(valid_common_exports);
+  "config",
+  "entries"
+]);
+var validate_layout_exports = validator(valid_layout_exports);
+var validate_page_exports = validator(valid_page_exports);
+var validate_layout_server_exports = validator(valid_layout_server_exports);
 var validate_page_server_exports = validator(valid_page_server_exports);
 var validate_server_exports = validator(valid_server_exports);
 var default_transform = ({ html }) => html;
@@ -3473,7 +3690,7 @@ async function respond(request, options2, manifest2, state) {
   if (is_data_request) {
     decoded = strip_data_suffix(decoded) || "/";
     url.pathname = strip_data_suffix(url.pathname) || "/";
-    invalidated_data_nodes = url.searchParams.get(INVALIDATED_PARAM)?.split("_").map(Boolean);
+    invalidated_data_nodes = url.searchParams.get(INVALIDATED_PARAM)?.split("").map((node) => node === "1");
     url.searchParams.delete(INVALIDATED_PARAM);
   }
   if (!state.prerendering?.fallback) {
@@ -3494,7 +3711,9 @@ async function respond(request, options2, manifest2, state) {
   const headers = {};
   let cookies_to_add = {};
   const event = {
+    // @ts-expect-error `cookies` and `fetch` need to be created after the `event` itself
     cookies: null,
+    // @ts-expect-error
     fetch: null,
     getClientAddress: state.getClientAddress || (() => {
       throw new Error(
@@ -3519,7 +3738,8 @@ async function respond(request, options2, manifest2, state) {
         } else {
           headers[lower] = value;
           if (state.prerendering && lower === "cache-control") {
-            state.prerendering.cache = value;
+            state.prerendering.cache = /** @type {string} */
+            value;
           }
         }
       }
@@ -3533,11 +3753,12 @@ async function respond(request, options2, manifest2, state) {
     preload: default_preload
   };
   try {
-    if (route && !is_data_request) {
+    if (route) {
       if (url.pathname === base || url.pathname === base + "/") {
         trailing_slash = "always";
       } else if (route.page) {
         const nodes = await Promise.all([
+          // we use == here rather than === because [undefined] serializes as "[null]"
           ...route.page.layouts.map((n2) => n2 == void 0 ? n2 : manifest2._.nodes[n2]()),
           manifest2._.nodes[route.page.leaf]()
         ]);
@@ -3550,25 +3771,37 @@ async function respond(request, options2, manifest2, state) {
         if (DEV)
           ;
       }
-      const normalized = normalize_path(url.pathname, trailing_slash ?? "never");
-      if (normalized !== url.pathname && !state.prerendering?.fallback) {
-        return new Response(void 0, {
-          status: 308,
-          headers: {
-            "x-sveltekit-normalize": "1",
-            location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
-          }
-        });
+      if (!is_data_request) {
+        const normalized = normalize_path(url.pathname, trailing_slash ?? "never");
+        if (normalized !== url.pathname && !state.prerendering?.fallback) {
+          return new Response(void 0, {
+            status: 308,
+            headers: {
+              "x-sveltekit-normalize": "1",
+              location: (
+                // ensure paths starting with '//' are not treated as protocol-relative
+                (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
+              )
+            }
+          });
+        }
       }
     }
-    const { cookies, new_cookies, get_cookie_header } = get_cookies(
+    const { cookies, new_cookies, get_cookie_header, set_internal } = get_cookies(
       request,
       url,
       trailing_slash ?? "never"
     );
     cookies_to_add = new_cookies;
     event.cookies = cookies;
-    event.fetch = create_fetch({ event, options: options2, manifest: manifest2, state, get_cookie_header });
+    event.fetch = create_fetch({
+      event,
+      options: options2,
+      manifest: manifest2,
+      state,
+      get_cookie_header,
+      set_internal
+    });
     if (state.prerendering && !state.prerendering.fallback)
       disable_search(url);
     const response = await options2.hooks.handle({
@@ -3578,6 +3811,7 @@ async function respond(request, options2, manifest2, state) {
           const value = headers[key2];
           response2.headers.set(
             key2,
+            /** @type {string} */
             value
           );
         }
@@ -3593,7 +3827,10 @@ async function respond(request, options2, manifest2, state) {
       if (if_none_match_value?.startsWith('W/"')) {
         if_none_match_value = if_none_match_value.substring(2);
       }
-      const etag = response.headers.get("etag");
+      const etag = (
+        /** @type {string} */
+        response.headers.get("etag")
+      );
       if (if_none_match_value === etag) {
         const headers2 = new Headers({ etag });
         for (const key2 of [
@@ -3618,6 +3855,7 @@ async function respond(request, options2, manifest2, state) {
       const location = response.headers.get("location");
       if (location) {
         return redirect_json_response(new Redirect(
+          /** @type {any} */
           response.status,
           location
         ));
@@ -3714,12 +3952,20 @@ async function respond(request, options2, manifest2, state) {
   }
 }
 var Server = class {
+  /** @type {import('types').SSROptions} */
   #options;
+  /** @type {import('types').SSRManifest} */
   #manifest;
+  /** @param {import('types').SSRManifest} manifest */
   constructor(manifest2) {
     this.#options = options;
     this.#manifest = manifest2;
   }
+  /**
+   * @param {{
+   *   env: Record<string, string>
+   * }} opts
+   */
   async init({ env }) {
     const entries = Object.entries(env);
     const prefix = this.#options.env_public_prefix;
@@ -3731,7 +3977,7 @@ var Server = class {
         const module = await get_hooks();
         this.#options.hooks = {
           handle: module.handle || (({ event, resolve }) => resolve(event)),
-          handleError: module.handleError || (({ error: error2 }) => console.error(error2?.stack)),
+          handleError: module.handleError || (({ error: error2 }) => console.error(error2)),
           handleFetch: module.handleFetch || (({ request, fetch: fetch2 }) => fetch2(request))
         };
       } catch (error2) {
@@ -3741,6 +3987,10 @@ var Server = class {
       }
     }
   }
+  /**
+   * @param {Request} request
+   * @param {import('types').RequestOptions} options
+   */
   async respond(request, options2) {
     if (!(request instanceof Request)) {
       throw new Error(
@@ -3759,10 +4009,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set(["admin/config.yml", "admin/index.html", "favicon.png", "global.css", "logo-192.png", "logo-512.png", "manifest.json"]),
-  mimeTypes: { ".yml": "text/yaml", ".html": "text/html", ".png": "image/png", ".css": "text/css", ".json": "application/json" },
+  assets: /* @__PURE__ */ new Set(["favicon.png", "logo-192.png", "logo-512.png", "manifest.json"]),
+  mimeTypes: { ".png": "image/png", ".json": "application/json" },
   _: {
-    client: { "start": "_app/immutable/entry/start.a84130f1.js", "app": "_app/immutable/entry/app.9ec4a029.js", "imports": ["_app/immutable/entry/start.a84130f1.js", "_app/immutable/chunks/index.5429c538.js", "_app/immutable/chunks/singletons.856d0d5c.js", "_app/immutable/entry/app.9ec4a029.js", "_app/immutable/chunks/index.5429c538.js"], "stylesheets": [], "fonts": [] },
+    client: { "start": "_app/immutable/entry/start.1af6b46f.js", "app": "_app/immutable/entry/app.4318ed8a.js", "imports": ["_app/immutable/entry/start.1af6b46f.js", "_app/immutable/chunks/index.9e113df3.js", "_app/immutable/chunks/singletons.254110ff.js", "_app/immutable/entry/app.4318ed8a.js", "_app/immutable/chunks/index.9e113df3.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2))
@@ -3773,45 +4023,47 @@ var manifest = {
     }
   }
 };
-var prerendered = /* @__PURE__ */ new Set(["/", "/about", "/speaking", "/uses", "/uses/__data.json", "/work"]);
+var prerendered = /* @__PURE__ */ new Set(["/", "/about", "/speaking", "/talks", "/talks/fresh-style", "/uses", "/uses/__data.json", "/work"]);
 
 // .svelte-kit/cloudflare-tmp/_worker.js
 async function e(e3, t2) {
   let n2 = "string" != typeof t2 && "HEAD" === t2.method;
   n2 && (t2 = new Request(t2, { method: "GET" }));
-  let a2 = await e3.match(t2);
-  return n2 && a2 && (a2 = new Response(null, a2)), a2;
+  let r3 = await e3.match(t2);
+  return n2 && r3 && (r3 = new Response(null, r3)), r3;
 }
 function t(e3, t2, n2, o2) {
-  return ("string" == typeof t2 || "GET" === t2.method) && a(n2) && (n2.headers.has("Set-Cookie") && (n2 = new Response(n2.body, n2)).headers.append("Cache-Control", "private=Set-Cookie"), o2.waitUntil(e3.put(t2, n2.clone()))), n2;
+  return ("string" == typeof t2 || "GET" === t2.method) && r(n2) && (n2.headers.has("Set-Cookie") && (n2 = new Response(n2.body, n2)).headers.append("Cache-Control", "private=Set-Cookie"), o2.waitUntil(e3.put(t2, n2.clone()))), n2;
 }
 var n = /* @__PURE__ */ new Set([200, 203, 204, 300, 301, 404, 405, 410, 414, 501]);
-function a(e3) {
-  if (!n.has(e3.status) || ~(e3.headers.get("Vary") || "").indexOf("*"))
+function r(e3) {
+  if (!n.has(e3.status))
+    return false;
+  if (~(e3.headers.get("Vary") || "").indexOf("*"))
     return false;
   let t2 = e3.headers.get("Cache-Control") || "";
   return !/(private|no-cache|no-store)/i.test(t2);
 }
 function o(n2) {
-  return async function(a2, o2) {
-    let r2 = await e(n2, a2);
-    if (r2)
-      return r2;
+  return async function(r3, o2) {
+    let a = await e(n2, r3);
+    if (a)
+      return a;
     o2.defer((e3) => {
-      t(n2, a2, e3, o2);
+      t(n2, r3, e3, o2);
     });
   };
 }
 var s2 = caches.default;
-var e2 = t.bind(0, s2);
-var c = e.bind(0, s2);
-var r = o.bind(0, s2);
+var c = t.bind(0, s2);
+var r2 = e.bind(0, s2);
+var e2 = o.bind(0, s2);
 var server = new Server(manifest);
 var worker = {
   async fetch(req, env, context) {
     await server.init({ env });
     let pragma = req.headers.get("cache-control") || "";
-    let res = !pragma.includes("no-cache") && await c(req);
+    let res = !pragma.includes("no-cache") && await r2(req);
     if (res)
       return res;
     let { pathname } = new URL(req.url);
@@ -3837,18 +4089,25 @@ var worker = {
       });
     } else {
       res = await server.respond(req, {
+        // @ts-ignore
         platform: { env, context, caches },
         getClientAddress() {
           return req.headers.get("cf-connecting-ip");
         }
       });
     }
-    pragma = res.headers.get("cache-control");
-    return pragma && res.ok ? e2(req, res, context) : res;
+    pragma = res.headers.get("cache-control") || "";
+    return pragma && res.status < 400 ? c(req, res, context) : res;
   }
 };
 var worker_default = worker;
 export {
   worker_default as default
 };
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
 //# sourceMappingURL=_worker.js.map

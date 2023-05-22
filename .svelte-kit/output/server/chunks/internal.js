@@ -99,6 +99,7 @@ const options = {
   app_template_contains_nonce: false,
   csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
   csrf_check_origin: true,
+  track_server_fetches: false,
   embedded: false,
   env_public_prefix: "PUBLIC_",
   hooks: null,
@@ -107,7 +108,7 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="viewport" content="width=device-width,initial-scale=1.0" />\n    <meta name="theme-color" content="#333333" />\n    <link rel="stylesheet" href="global.css" />\n    <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />\n    <link rel="icon" type="image/png" href="favicon.png" />\n    <link rel="preconnect" href="https://fonts.googleapis.com" />\n    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n    <link\n      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"\n      rel="stylesheet"\n    />\n\n    <!-- This contains the contents of the <svelte:head> component, if\n	     the current page has one -->\n    ' + head + '\n  </head>\n  <body>\n    <!-- The application will be rendered inside this element,\n	     because `src/client.js` references it -->\n    <div id="sapper">' + body + "</div>\n  </body>\n</html>\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="viewport" content="width=device-width,initial-scale=1.0" />\n    <meta name="theme-color" content="#333333" />\n    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />\n    <link rel="icon" type="image/png" href="/favicon.png" />\n    <link rel="preconnect" href="https://fonts.googleapis.com" />\n    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n    <link\n      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"\n      rel="stylesheet"\n    />\n\n    <!-- This contains the contents of the <svelte:head> component, if\n	     the current page has one -->\n    ' + head + '\n  </head>\n  <body>\n    <!-- The application will be rendered inside this element,\n	     because `src/client.js` references it -->\n    <div id="sapper">' + body + "</div>\n  </body>\n</html>\n",
     error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -168,7 +169,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "nhw5av"
+  version_hash: "19iquxk"
 };
 function get_hooks() {
   return {};
