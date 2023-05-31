@@ -2,6 +2,21 @@
 
 <ul>
   <li>
+    Media Queries
+    <ul>
+      <li>
+        Style Queries
+        <ul>
+          <li>
+            <a href="https://ishadeed.com/article/css-container-style-queries/"
+              >Style Queries - Ahmad Shadeed
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
     Cascade
     <ul>
       <li>
@@ -52,6 +67,22 @@
           </li>
         </ul>
       </li>
+      <li>
+        Color Contrast
+        <ul>
+          <li>
+            <a href="https://caniuse.com/mdn-css_types_color_color-contrast"
+              >Can I Use</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-contrast"
+              >MDN</a
+            >
+          </li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>
@@ -68,11 +99,21 @@
         </ul>
       </li>
       <li>
+        Scroll Animations
+        <ul>
+          <li>
+            <a href="https://scroll-driven-animations.style/"
+              >Scroll Driven Animations - Bramus</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
         Animation Composition
         <ul>
           <li>
             <a href="https://codepen.io/argyleink/pen/BaPxMWb"
-              >https://codepen.io/argyleink/pen/BaPxMWb</a
+              >Codepen by Adam Argyle</a
             >
           </li>
         </ul>
@@ -83,6 +124,12 @@
           <li>
             <a href="https://fullystacked.net/posts/linear/"
               >Full Stacked Linear</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://caniuse.com/mdn-css_types_easing-function_linear-function"
+              >Can I Use</a
             >
           </li>
         </ul>
