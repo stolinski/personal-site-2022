@@ -5,6 +5,27 @@
     Media Queries
     <ul>
       <li>
+        Range Syntax
+        <ul>
+          <li>
+            <a
+              href="https://css-tricks.com/the-new-css-media-query-range-syntax/"
+              >The New CSS Media Query Range Syntax - Preethi Selvam</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Container Queries
+        <ul>
+          <li>
+            <a href="https://web.dev/cq-stable/"
+              >Container Queries Land In Stable - Una Kravets</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
         Style Queries
         <ul>
           <li>
@@ -105,6 +126,7 @@
           </li>
         </ul>
       </li>
+
       <li>
         Cascade Layers
         <ul>
@@ -117,6 +139,20 @@
           <li>
             <a href="https://ishadeed.com/article/cascade-layers/"
               >Ahmad Shadeed - Hello Cascade Layers</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        @Property
+        <ul>
+          <li>
+            <a href="https://web.dev/at-property/"
+              >@property: giving superpowers to CSS variables - Una Kravets</a
+            >
+          </li>
+          <li>
+            <a href="https://caniuse.com/mdn-css_at-rules_property">Can I Use</a
             >
           </li>
         </ul>
