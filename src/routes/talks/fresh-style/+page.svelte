@@ -17,6 +17,82 @@
     </ul>
   </li>
   <li>
+    Color
+    <ul>
+      <li>
+        OKLCH
+        <ul>
+          <li>
+            <a
+              href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl#oklch-vs-oklab--lch-vs-lab"
+              >OKLCH in CSS</a
+            >
+          </li>
+          <li>
+            <a href="https://oklch.com">OKLCH Color Picker</a>
+          </li>
+          <li>
+            <a
+              href="https://developer.chrome.com/articles/high-definition-css-color-guide/"
+              >High Definition CSS Color Guide - Adam Argyle</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Color Mix
+        <ul>
+          <li>
+            <a
+              href="https://www.smashingmagazine.com/2022/06/simplify-color-palette-css-color-mix/"
+              >CSS Color Mix - Daniel Yuschick</a
+            >
+          </li>
+          <li>
+            <a href="https://developer.chrome.com/blog/css-color-mix/"
+              >CSS Color Mix - Adam Argyle</a
+            >
+          </li>
+          <li>
+            <a href="https://caniuse.com/mdn-css_types_color_color-mix"
+              >Can I Use</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Color Contrast
+        <ul>
+          <li>
+            <a href="https://caniuse.com/mdn-css_types_color_color-contrast"
+              >Can I Use</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-contrast"
+              >MDN</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Relative Color
+        <ul>
+          <li>
+            <a
+              href="https://preset-env.cssdb.org/blog/postcss-relative-color-syntax/"
+              >PostCSS Relative Color</a
+            >
+          </li>
+          <li>
+            <a href="https://caniuse.com/css-relative-colors">Can I Use</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
     Cascade
     <ul>
       <li>
@@ -47,44 +123,7 @@
       </li>
     </ul>
   </li>
-  <li>
-    Color
-    <ul>
-      <li>
-        OKLCH
-        <ul>
-          <li>
-            <a
-              href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl#oklch-vs-oklab--lch-vs-lab"
-              >OKLCH in CSS</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://developer.chrome.com/articles/high-definition-css-color-guide/"
-              >High Definition CSS Color Guide - Adam Argyle</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li>
-        Color Contrast
-        <ul>
-          <li>
-            <a href="https://caniuse.com/mdn-css_types_color_color-contrast"
-              >Can I Use</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-contrast"
-              >MDN</a
-            >
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+
   <li>
     Animations
     <ul>
@@ -114,6 +153,12 @@
           <li>
             <a href="https://codepen.io/argyleink/pen/BaPxMWb"
               >Codepen by Adam Argyle</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://caniuse.com/mdn-css_properties_animation-composition"
+              >Can I use</a
             >
           </li>
         </ul>
