@@ -1,5 +1,22 @@
 <h1>Fresh Style Compendium</h1>
 
+<h3>Syntax Episodes On This Topic</h3>
+<ul>
+  <li>
+    <a href="https://syntax.fm/show/ull/supper-club-bramus-van-damme-on-css"
+      >Supper Club × Bramus Van Damme on CSS
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://syntax.fm/show/616/supper-club-adam-argyle-on-what-s-new-in-css"
+      >Supper Club × Adam Argyle on What's New in CSS
+    </a>
+  </li>
+</ul>
+
+<h3>Talk Topics and Links</h3>
+
 <ul>
   <li>
     Media Queries
