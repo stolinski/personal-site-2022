@@ -1,4 +1,4 @@
-<h1>Fresh Style Links</h1>
+<h1>Fresh Style Compendium</h1>
 
 <ul>
   <li>
