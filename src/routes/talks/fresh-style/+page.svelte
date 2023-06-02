@@ -1,5 +1,13 @@
 <h1>Fresh Style Compendium</h1>
 
+<h3>Slides</h3>
+
+<ul>
+  <li>
+    <a href="https://main--elegant-dieffenbachia-da3a27.netlify.app/">Slides</a>
+  </li>
+</ul>
+
 <h3>Syntax Episodes On This Topic</h3>
 <ul>
   <li>
