@@ -20,16 +20,18 @@
     font-feature-settings: "kern", "liga", "clig", "calt";
     background: #111;
     line-height: 1.5;
-    font-family: "1", "2", "3", monospace;
+    font-family: "Space Mono", monospace;
   }
 
   :global(p > a) {
     background: var(--blue);
+    font-family: "3";
   }
 
   main {
     padding: 2rem 2rem 0;
     display: grid;
+    font-family: "2";
   }
 
   .theme {
@@ -37,6 +39,7 @@
     --black: #111;
     --bg: var(--black);
     --primary: var(--yellow);
+    font-family: "1";
   }
 
   :global(.theme.rad) {
