@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "🆒";
+  src: url("https://pub-ed2e694be09449d18212d9e8efa41f88.r2.dev/ATNameMonoVariable-Regular.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "🆒";
+  src: url("https://scotts-fonts.scott-bb5.workers.dev/NameMonoVariable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "🆒";
+  src: url("https://scott-fonts-pages.pages.dev/fonts/NameMonoVariable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 html {
   box-sizing: border-box;
 }
