@@ -20,7 +20,7 @@
     font-feature-settings: "kern", "liga", "clig", "calt";
     background: #111;
     line-height: 1.5;
-    font-family: "Space Mono", monospace;
+    font-family: "Space Mono", "1", "2", "3", monospace;
   }
 
   :global(p > a) {
